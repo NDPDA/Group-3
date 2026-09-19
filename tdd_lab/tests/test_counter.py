@@ -36,3 +36,12 @@ class TestCounterEndpoints:
 
         assert result.status_code == status.HTTP_200_OK
         assert result.get_json() == {"omari": 0}
+
+    def test_increment_counter(self, client):
+        """It should implement an existing counter"""
+        client.post('/counters/apple')
+
+        result = client.put('/counters/apple')
+
+        assert result.status_code == status.HTTP_200_OK
+        assert result.get_json() == {"apple": 1}
